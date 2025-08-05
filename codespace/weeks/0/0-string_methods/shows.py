@@ -10,11 +10,11 @@ SHOWS = [
 ]
 
 def get_shows():
-    cleaned_shows = []
+    shows = []
 
     for show in SHOWS:
-        cleaned_shows.append(show.strip().title())
-    print(', '.join(cleaned_shows))
+        shows.append(show.strip().title())
+    print(', '.join(shows))
 
 if __name__ == "__main__":
     get_shows()
