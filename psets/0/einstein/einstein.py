@@ -5,8 +5,8 @@ def main():
 
     c = pow(C, 2)
 
-    print("E:", (m * c))
+    print("E:", (m * pow(C, 2)))
 
 
-if __name__ == "__main__":
-    main()
+
+main()

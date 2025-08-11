@@ -1,13 +1,12 @@
 def convert(text):
-    text = text.replace(":)", "🙂")
-    text = text.replace(":(", "🙁")
+    text = text.replace(":)", "🙂").replace(":(", "🙁")
 
     return text
 
 def main():
-    message = input().strip()
+    message = convert(input())
 
-    print(convert(message))
-    
-if __name__ == "__main__":
-    main()
+    print(message)
+
+
+main()
