@@ -1,18 +1,18 @@
-# Function prompts the user to a guess number
+# defines a function that prompts the user to enter a guess number
 
 def get_guess():
-    # it converts the input to an integer and returns it
+    # convert user input to integer and return a number
     number = int(input("Enter a guess number: "))
     return number
 
 def main():
     number = get_guess()
 
-    # it check if the number is 30. if so, it prints "Correct!", otherwise "Incorrect!"
+    # check if `number` is 30. print "Correct!", otherwise "Incorrect!"
     if number == 30:
         print("Correct!")
     else:
         print("Incorrect!")
 
-# call `main' to start the program
+# call `main` to start the program
 main()

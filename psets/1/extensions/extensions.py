@@ -23,12 +23,8 @@ def get_file_extension(filename):
 
 def main():
     file = input("File name: ").strip().lower()
-    mime_type = get_file_extension(file)
-    print(mime_type)
+    extension = get_file_extension(file)
+    print(extension)
 
-
-main()
-
-
-
-
+if __name__ == "main"
+    main()
