@@ -1,29 +1,29 @@
 def main():
     expr = input("Expression: ").strip()
 
-    x, y, z = expr.split()
+    x, operator, y = expr.split()
 
     x = float(x)
-    z = float(z)
+    y = float(y)
 
-    ans = calculate(x, y, z)
+    ans = calculate(x, operator, y)
 
     print(ans)
 
-def calculate(x, y, z):
-    match y:
+def calculate(x, operator, y):
+    match operator:
         case "+":
-            return x + z
-        case "-":
-            return x - z
+            return x + y
+        case "-":   
+            return x - y
         case "*":
-            return x * z
+            return x * y
         case "/":
-            return "undefined" if z == 0 else x / z
+            return "undefined" if z == 0 else x / y
         case "%":
-            return x % z
+            return x % y
         case "^":
-            return x ** z
+            return x ** y
         case _:
             return "INVALID OPERATOR"
 
