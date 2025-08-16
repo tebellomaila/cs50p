@@ -1,18 +1,37 @@
-# defines a function that prompts the user to enter a guess number
+SECRET = 30
+MAX_ATTEMPTS = 3
 
-def get_guess():
-    # convert user input to integer and return a number
-    number = int(input("Enter a guess number: "))
-    return number
+def check_guess(n):
+    """ Validate user's guessed number to secret number """
+    
+    if n > SECRET:
+        print("Too high")
+    elif n < SECRET:
+        print("Too low")
+    else:
+        print(f"You guessed number #{SECRET}\n")
+
+    return n == SECRET 
 
 def main():
-    number = get_guess()
+    """ Prompt user for input with the current attempt number """
+    
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            user_input = input(f"Enter a number to guess (Attempt {attempt}/{MAX_ATTEMPTS}): ")
+            number = int(user_input) # integer conversion
 
-    # check if `number` is 30. print "Correct!", otherwise "Incorrect!"
-    if number == 30:
-        print("Correct!")
-    else:
-        print("Incorrect!")
+            if check_guess(number):
+                print("You won")
+                return
+            else:
+                print("Incorrect! Try again.")
+        except ValueError:
+            print(f"Error: {user_input} must be a number") # if conversion fails, raise an error message
+    
+    print("GAME OVER")
 
-# call `main` to start the program
-main()
+
+
+if __name__ == "__main__":
+    main()
