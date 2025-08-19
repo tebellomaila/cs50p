@@ -10,16 +10,26 @@ def get_grades(grade_dict, student_names):
 def main():
     # Dictionary mapping student names to grades
     STUDENT_GRADES = {"tebello": "B", "mamello": "A", "mpho": "D"}
+    print(STUDENT_GRADES)
 
     # List of student name to query grades for
     students = ["tebello", "mpho"]
-    
-    # Output the results
     print(get_grades(STUDENT_GRADES, ["tebello", "mpho"]))
+
+    # Add student grade to the dictionary
+    STUDENT_GRADES["seth"] = "C"
     print(get_grades(STUDENT_GRADES, ["seth"]))
+
+    # Change grade for current student
+    STUDENT_GRADES["seth"] = "A"
+    print(get_grades(STUDENT_GRADES, ["seth"]))
+    
+    # Remove student name from the dictionary
+    del(STUDENT_GRADES["mpho"])
+
+    # Output all grade results
+    print(STUDENT_GRADES)
 
 
 if __name__ == "__main__":
     main()
-
-
