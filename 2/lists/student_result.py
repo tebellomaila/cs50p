@@ -10,16 +10,16 @@ STUDENTS =  [tebello, thabiso, luke, seth]
 
 """ Get grade results for student name to search for """
 
-def get_student_results(name, grade, student_list):
+def get_student_results(student_name, student_grade, student_list):
     # Search through each student in the list for name match
     for student in student_list:
-        if student[0] == name:
-            output  = f"Student: {name.title()}\n"
+        if student[0] == student_name:
+            output  = f"Student: {student_name.title()}\n"
             output += f"{'-' * 30}\n"
             # Search for the student's grade results
             for result in student[1:]:
-                if result[0] == grade:
-                    output += f"{grade.title()} Results: {result[1]}\n" 
+                if result[0] == student_grade:
+                    output += f"{student_grade.title()} Results: {result[1]}\n" 
                     return output   # Results found for student
             else:
                 output += f"Results not found\n"

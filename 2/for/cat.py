@@ -1,21 +1,23 @@
-def get_number():
-    # prompt the user until a valid positive integer
+def meow():
+    """ Prompt the user until a valid positive integer """
     while True:
-        number = int(input("How many word sounds do you want to make? "))
-        # checks if the number is positive
-        if number > 0:
-            return number # return valid input
-        else:
-            print("Input error: expected a positive number\n")
+        try:
+            num = int(input("How many word sounds do you want to make? "))
+            if num > 0:
+                return num
+            else:
+                print("InputError: expected a positive number\n")
+        except ValueError:
+            print("InputError: expected a numeric input\n")
 
-def meow(n):
-    # print "meow!" `n` times
-    for _ in range(n):
+def main():
+    # Get the number from user
+    words_count = meow()
+
+    # Iterate `n` times
+    for word in range(words_count):
         print("meow!")
 
 
 if __name__ == "__main__":
-    # get user input
-    number = get_number()
-
-    meow(number)
+    main()

@@ -1,10 +1,11 @@
 """ Get grades for a list of students from dictionary """
 
-def get_grades(grade_dict, student_names):
+def get_grades(student_dict, student_name):
     grade_list = []
-    for student in student_names:
+    for student in student_dict:
         # Use get() to avoid KeyError
-        grade_list.append(grade_dict[student])
+        if student in student_name:
+            grade_list += student_dict[student]
     return grade_list
 
 def main():
@@ -14,15 +15,15 @@ def main():
 
     # List of student name to query grades for
     students = ["tebello", "mpho"]
-    print(get_grades(STUDENT_GRADES, ["tebello", "mpho"]))
+    print(get_grades(STUDENT_GRADES, students))
 
     # Add student grade to the dictionary
     STUDENT_GRADES["seth"] = "C"
-    print(get_grades(STUDENT_GRADES, ["seth"]))
+    print(STUDENT_GRADES)
 
     # Change grade for current student
     STUDENT_GRADES["seth"] = "A"
-    print(get_grades(STUDENT_GRADES, ["seth"]))
+    print(STUDENT_GRADES)
     
     # Remove student name from the dictionary
     del(STUDENT_GRADES["mpho"])

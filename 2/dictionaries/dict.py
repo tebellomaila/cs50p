@@ -3,6 +3,7 @@ def main():
 
     print(grades)
     print(grades["thabiso"])
+    # use grades.get("boemo") to avoid KeyError
     print(grades["boemo"])
 
 
