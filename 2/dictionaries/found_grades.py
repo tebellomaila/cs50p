@@ -8,21 +8,20 @@ tshepo = {"name": "tshepo", "id": "219600874", "tests": [], "exams":[]}
 
 
 """ A list of student records to search """
-STUDENTS = [tebello, mamello, seth, thabiso]
+STUDENTS = [tshepo, tebello, mamello, seth, thabiso]
 
 """ Find grade results and return True if grade results exist otherwise False """
 def grades_found(student_name, student_list):
     # Search the student name in the list of dictionaries
     for student in student_list:
         if student["name"] == student_name:
-            if (student.get("tests") and len(student["tests"]) > 0) or (student.get("exams") and len(student["exams"]) > 0):
-                return True
-        return f"Student not found"
-    return False
+            return True if ("tests" in student and len(student["tests"]) > 0) or ("exams" in student and len(student["exams"]) >0) else False
+    return "Student not found"
 
 
 def main():
-    #print(grades_found("tebello", STUDENTS))
+    # Test cases
+    print(grades_found("tebello", STUDENTS))
     print(grades_found("thabiso", STUDENTS))
     print(grades_found("tshepo", STUDENTS))
     print(grades_found("lubanzi", STUDENTS))
