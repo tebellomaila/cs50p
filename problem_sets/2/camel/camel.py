@@ -1,37 +1,32 @@
 def snake_case(s):
     """ Convert a CamelCase string to snake case """
     
-    snake_case = []
+    snake_chars = []
 
-    # If the input string is empty, return an empty string
+    # If the input string is empty, return empty string
     if not s:
         return ""
 
-    # Handle the first character
-    if s[0].isupper():
-        snake_case.append(s[0].lower())
-    else:
-        snake_case.append(s[0])
+    # Convert first character to lowercase
+    snake_chars = [s[0].lower()]
 
     # Iterate through the remaining characters
     for c in s[1:]:
         # If the character is uppercase, add an underscore first then convert to lowercase
         if c.isupper():
-            snake_case.append("_" + c.lower())
+            snake_chars.append("_")
+            snake_chars.append(c.lower())
         else:
-            snake_case.append(c)
+            snake_chars.append(c)
 
     # Join characters into a single string
-    return "".join(snake_case)
+    return "".join(snake_chars)
 
 
 def main():
-    # Prompt user for CamelCase input
+    """ Main function to handle user input and output conversion """
     camel_str = input("camelCase: ")
-
-    # Convert the string to snake_case
     snake_str = snake_case(camel_str)
-
     print(f"snake_case: {snake_str}")    
 
 

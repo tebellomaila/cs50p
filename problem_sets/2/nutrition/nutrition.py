@@ -1,5 +1,8 @@
-def get_calories(fruit):
-    fruit_data = {
+def main():
+    """ Check if fruit exists in calorie data and return its calories """
+
+    # FDA fruit calorie as per serving based on FDA poster
+    fruit_calories = {
         "apple": 130,
         "avocado": 50,
         "banana": 110,
@@ -21,3 +24,15 @@ def get_calories(fruit):
         "tangerine": 50,
         "watermelon": 80
     }
+    
+    # Prompt user for fruit input (case-insensitive)
+    fruit = input("Item: ").strip().lower()
+    
+
+    if fruit in fruit_calories:
+        # Output calories if fruit is found
+        print(f"Calories: {fruit_calories[fruit]}")
+
+
+if __name__ == "__main__":
+    main()
