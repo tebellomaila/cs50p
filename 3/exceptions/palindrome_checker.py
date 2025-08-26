@@ -1,5 +1,5 @@
 def is_pal(word):
-    """ Returns True if list is palindrome otherwise False """
+    """ Returns True if string is palindrome otherwise False """
     try:
         # Validate input type
         if not isinstance(word, list):
@@ -7,11 +7,9 @@ def is_pal(word):
 
         # Create a copy to avoid modifying the original list
         r_word = word.copy()
-        print(r_word, word)
 
         # Reverse the copy
         r_word.reverse()
-        print(r_word, word)
 
         # Compare the reversed copy with the original list
         return r_word == word
@@ -25,16 +23,19 @@ def is_pal(word):
 
 def main():
     """ Main function to test palindrome """
-    try:
-        # Test cases
-        print(is_pal(list("abcba"))) # Should return True
-        print(is_pal(list("rose"))) # Should return False
-        print(is_pal("mom")) # Should raise TypeError
+    
+    # Test cases
+    test_cases = [
+            list("abcba"),
+            list("rose"),
+            "mom",
+            [1,2,3,2,1],
+            []
+    ]
 
-        # Test with non list input
-        print(is_pal("not a list")) # Should raise TypeError
-    except Exception as e:
-        print(f"Error in main: {e}")
+    for i, test_case in enumerate(test_cases, 1):
+        print(f"Test case {i}: {test_case}")
+        print(f"Output: {is_pal(test_case)}\n")
 
 
 if __name__ == "__main__":
