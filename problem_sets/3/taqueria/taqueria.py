@@ -22,11 +22,14 @@ def main():
             item = input("Enter food item in the menu: ").strip().title()
             
             # Check the item exists in the menu and then calculate the total cost
-            if item in menu:
+            # Try to access the menu directly
+            
+            try:
                 total += menu[item]
                 print(f"Total: ${total:.2f}")
-            else:
+            except KeyError:
                 print("Item not found in the menu. Please try again")
+
 
     except EOFError:
         # Handle control-d input detected
