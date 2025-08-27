@@ -1,5 +1,5 @@
 def main():
-    """ Main function to handle order input and print running total cost """
+    """ Main function to handle order input and display the running total cost """
 
     # Menu dictionary with food items and prices
     menu = {
@@ -21,7 +21,7 @@ def main():
             # Prompt user for food item input
             item = input("Enter food item in the menu: ").strip().title()
             
-            # Check the item exists in the menu and then calculate the total cost
+            # Check if the item exists in the menu and then calculate the total cost
             # Try to access the menu directly
             
             try:
@@ -32,10 +32,10 @@ def main():
 
 
     except EOFError:
-        # Handle control-d input detected
+        # Handle control-d input when detected
         print("\nOrder is completed successfully. Thank you!")
     except KeyboardInterrupt:
-        # Handle control-c input detected
+        # Handle control-c input when detected
         print("\nOrder is cancelled successfully")
 
 
