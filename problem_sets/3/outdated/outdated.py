@@ -7,9 +7,9 @@ def parse_date(date):
     """ Parse and validate a date input in numeric format (MM/DD/YYYY) or
     textual format (Month DD, YYYY) """
 
-    if "/" in date_str:
+    if "/" in date:
         # Parse date input as a MM/DD/YYYY format
-        date = [d.strip() for d in date_str.split("/")]
+        date = [d.strip() for d in date.split("/")]
         
         if len(date) != 3:
             raise ValueError("Invalid date format")
@@ -17,41 +17,43 @@ def parse_date(date):
         # Convert date values to integers
         month, day, year = map(int, date)
 
-    elif " " in date_str:
+    elif " " in date:
         # Split date by spaces and check format (Month DD, YYYY)
-        date = [d.strip() for d in date_str.split()]
+        date = [d.strip() for d in date.split()]
 
         if len(date) != 2 or "," not in date[1].endswith(","):
             raise ValueError("Invalid date format")
 
-        month_str, day, year = date
+        month, day, year = date
 
         # Remove comma from the day suffix
         day = day.rstrip(",")
 
         # Convert month to lowercase
-        month_str = month.title()
+        month = month.title()
 
         # Validate month is in the list (case-insensitive)
-        if month_str not in months:
+        if month not in months:
             raise KeyError("Invalid month name")
 
-        month = months.index(month_str) + 1 # Convert month name to number
+        month = months.index(month) + 1 # Convert month name to number
+        print(month)
         day = int(day)
         year = int(year)
 
     else:
-        continue
+        raise ValueError("Invalid date format")
 
-        # Validate month and day are numeric
-        if not (month.isdigit() and day.isdigit()):
-            raise ValueError("Day and month must be numeric")
+    # Validate month and day are numeric
+    if not (month.isdigit() and day.isdigit()):
+        raise ValueError("Day and month must be numeric")
 
-            # Validate month and day ranges
-            if not (1 <= month <= 12 or 1 <= day <= 31):
-                raise ValueError("Day or Month is out of range")
-            if year <= 0:
-                raise ValueError("Year must be positive")
+    # Validate month and day ranges
+    if not (1 <= month <= 12 or 1 <= day <= 31):
+        raise ValueError("Day or Month is out of range")
+    if year <= 0:
+        raise ValueError("Year must be positive")
+    
     return year, month, day
 
 
