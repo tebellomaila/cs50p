@@ -36,23 +36,33 @@ def parse_date(date):
     elif "," in date:
         # Split into date portion and year portion
         date_list = [d.strip() for d in date.split(",")]
-        if len(date_str) != 2:
-            raise ValueError("Invalid input. Expected Month DD, YYYY")
+        if len(date_list) != 2:
+            raise ValueError("Invalid input. Expected to be 'Month DD, YYYY'")
 
-        year = date_list[1]
+        year_str = date_list[1]
 
         # Extract the month and day
-         month_day = date[0]
+        month_day = date_list[0]
 
+        # Split date portion into month name and day
+        try:
+            month_str, day_str = month_day.split()
+        except ValueError:
+            raise ValueError("Invalid input. Expected to be 'Month DD, YYYY'")
+
+        # Convert month to title case and find its index
+        month_str = month_str.title()
+        if month_str not in months:
+            raise ValueError("Invalid month name. Expected to be 'Month DD, YYYY'")
+        month = months.index(month_str) + 1
 
         try:
-            # Split date portion into month name and day
             day = int(day_str)
             year = int(year_str)
         except ValueError:
-            raise ValueError("Day and year must be numeric values")
+            raise ValueError("Day and year must be numbers")
 
-        # Validate day range
+        # Validate day and year ranges
         if not (1 <= day <= 31):
             raise ValueError("Day must be between 1 and 31")
         if year <= 0:
@@ -84,7 +94,7 @@ def main():
             print(f"Error: {e}")
             continue
         except (EOFError, KeyboardInterrupt):
-            # handle control-d / control-c when detected to end the program gracefully
+            # handle Ctrl+D / Ctrl+C when detected to end the program
             break
 
 
