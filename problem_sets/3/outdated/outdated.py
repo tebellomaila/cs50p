@@ -6,55 +6,62 @@ months = [
 def parse_date(date):
     """ Parse and validate a date input in numeric format (MM/DD/YYYY) or
     textual format (Month DD, YYYY) """
-
+    
+    # Handle the date numeric format (MM/DD/YYYY)
     if "/" in date:
-        # Parse date input as a MM/DD/YYYY format
-        date = [d.strip() for d in date.split("/")]
+        # Split and strip the date input into month, day and year
+        date_list = [d.strip() for d in date.split("/")]
         
-        if len(date) != 3:
-            raise ValueError("Invalid date format")
+        # Validate the date token count matches the numeric format 
+        if len(date_list) != 3:
+            raise ValueError("Invalid input. Expected MM/DD/YYYY")
 
-        # Convert date values to integers
-        month, day, year = map(int, date)
+        try:
+            # Convert the date values to integers
+            month, day, year = map(int, date_list)
+        except ValueError:
+            raise ValueError("Month, day and year must be numbers")
 
-    elif " " in date:
-        # Split date by spaces and check format (Month DD, YYYY)
-        date = [d.strip() for d in date.split()]
+        # Validate the month and day ranges
+        if not (1 <= month <= 12):
+            raise ValueError("Month must be between 1 and 12")
+        if not (1 <= day <= 31):
+            raise ValueError("Day must be between 1 and 31")
+        if year <= 0:
+            raise ValueError("Year must be positive")
+        
+        return year, month, day
+    
+    # Handle the date textual format (Month DD, YYYY)
+    elif "," in date:
+        # Split into date portion and year portion
+        date_list = [d.strip() for d in date.split(",")]
+        if len(date_str) != 2:
+            raise ValueError("Invalid input. Expected Month DD, YYYY")
 
-        if len(date) != 2 or "," not in date[1].endswith(","):
-            raise ValueError("Invalid date format")
+        year = date_list[1]
 
-        month, day, year = date
+        # Extract the month and day
+         month_day = date[0]
 
-        # Remove comma from the day suffix
-        day = day.rstrip(",")
 
-        # Convert month to lowercase
-        month = month.title()
+        try:
+            # Split date portion into month name and day
+            day = int(day_str)
+            year = int(year_str)
+        except ValueError:
+            raise ValueError("Day and year must be numeric values")
 
-        # Validate month is in the list (case-insensitive)
-        if month not in months:
-            raise KeyError("Invalid month name")
+        # Validate day range
+        if not (1 <= day <= 31):
+            raise ValueError("Day must be between 1 and 31")
+        if year <= 0:
+            raise ValueError("Year must be positive")
 
-        month = months.index(month) + 1 # Convert month name to number
-        print(month)
-        day = int(day)
-        year = int(year)
+        return year, month, day
 
     else:
-        raise ValueError("Invalid date format")
-
-    # Validate month and day are numeric
-    if not (month.isdigit() and day.isdigit()):
-        raise ValueError("Day and month must be numeric")
-
-    # Validate month and day ranges
-    if not (1 <= month <= 12 or 1 <= day <= 31):
-        raise ValueError("Day or Month is out of range")
-    if year <= 0:
-        raise ValueError("Year must be positive")
-    
-    return year, month, day
+        raise ValueError("Unrecognised date format")
 
 
 def main():
@@ -72,10 +79,13 @@ def main():
             print(f"{year:04d}-{month:02d}-{day:02d}")
             break
 
-        except (ValueError, IndexError, KeyError):
-            continue    # If any conversion fails, prompt user again
+        except ValueError as e:
+            # If any conversion fails, prompt user again
+            print(f"Error: {e}")
+            continue
         except (EOFError, KeyboardInterrupt):
-            break   # handle control-d / control-c when detected to end the program gracefully
+            # handle control-d / control-c when detected to end the program gracefully
+            break
 
 
 if __name__ == "__main__":
