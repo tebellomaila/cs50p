@@ -20,7 +20,7 @@ def parse_date(date):
             # Convert the date values to integers
             month, day, year = map(int, date_list)
         except ValueError:
-            raise ValueError("Month, day and year must be numbers")
+            raise ValueError("Month, day and year must be numbers. Expected this date format 'MM/DD/YYYY'")
 
         # Validate the month and day ranges
         if not (1 <= month <= 12):
@@ -32,19 +32,18 @@ def parse_date(date):
         
         return year, month, day
     
-    # Handle the date textual format (Month DD, YYYY)
-    elif "," in date:
-        # Split into date portion and year portion
+    # Handles the date textual format (Month DD, YYYY)
+    elif "," in date and " " in date:
+        # Split the input into date list
         date_list = [d.strip() for d in date.split(",")]
         if len(date_list) != 2:
             raise ValueError("Invalid input. Expected to be 'Month DD, YYYY'")
 
+        # Extract year and month
         year_str = date_list[1]
-
-        # Extract the month and day
         month_day = date_list[0]
 
-        # Split date portion into month name and day
+        # Extract the date portion into month name and day
         try:
             month_str, day_str = month_day.split()
         except ValueError:
@@ -55,7 +54,8 @@ def parse_date(date):
         if month_str not in months:
             raise ValueError("Invalid month name. Expected to be 'Month DD, YYYY'")
         month = months.index(month_str) + 1
-
+        
+        # Handle integers conversion for the year and day
         try:
             day = int(day_str)
             year = int(year_str)
@@ -79,7 +79,7 @@ def main():
 
     while True:
         try:
-            # Prompt the user for date
+            # Prompt user for the date
             date_str = input("Date: ").strip()
 
             # Parse and validate the date
@@ -94,7 +94,7 @@ def main():
             print(f"Error: {e}")
             continue
         except (EOFError, KeyboardInterrupt):
-            # handle Ctrl+D / Ctrl+C when detected to end the program
+            # Handles Ctrl+D / Ctrl+C when detected to end the program
             break
 
 
