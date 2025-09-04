@@ -6,7 +6,7 @@ def main():
         # Initialize the Figlet object
         figlet = Figlet()
         
-        # Get list of available fonts from Figlet
+        # Get a list of available fonts from Figlet
         fonts = figlet.getFonts()
 
         # Validate command-line arguments before user input to avoid invalid prompts
@@ -14,28 +14,29 @@ def main():
         if len(sys.argv) not in [1, 3]:
             sys.exit("Invalid usage")
 
-        # Handle case when user provides valid font
+        # Handle case when user provides invalid font
         if len(sys.argv) == 3:
             # Check if 1 arg is a valid font flag
             if sys.argv[1] not in ["-f", "--font"]:
                 sys.exit("Invalid usage")
+            # Store the specified font name from the text input
+            font = sys.argv[2]
+            # Check if the font name exists in the available fonts from figlet
+            if font not in fonts:
+                sys.exit("Invalid usage")
 
         try:
-            # Prompt the user for text input
+            # Prompt the user for text input and validate the text input is not empty
             text = input("Input: ").strip()
-            # Check if the text input is empty
             if not text:
                 sys.exit("Error: No text entered")
 
-            # Handle font selection based on command-line arguments
+            # Handle the font selection based on command-line arguments provided
             if len(sys.argv) == 1:
-                f = choice(fonts)   # Random font selection
+                f = choice(fonts)   # Random font
             else:
-                # Store the specified name
+                # Store the specified font name
                 f = sys.argv[2]     # Use specified font
-                # Check if the font exists in available fonts from figlet
-                if f not in fonts:
-                    sys.exit("Invalid usage")
 
             # Set the selected font in the Figlet object
             figlet.setFont(font=f)
