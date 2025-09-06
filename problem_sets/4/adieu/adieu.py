@@ -14,7 +14,7 @@ def main():
                 # Read input from the user
                 name = input("Name: ").strip()
                 
-                # Empty line ends input and add non-empty name to the list
+                # Prompt user input and add non-empty names only to the list
                 if not name:
                     continue
                 names.append(name.title())
@@ -24,7 +24,7 @@ def main():
     except KeyboardInterrupt:
         pass
 
-    # Checks if names were entered in the list and use inflect to format the names grammatically
+    # Checks if the names were entered in the list and use inflect to format the names grammatically
     if names:
         print(f"\nAdieu, adieu, to {p.join(names)}")
     else:
