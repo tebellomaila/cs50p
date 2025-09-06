@@ -16,13 +16,11 @@ def main():
 
         # Handle case when user provides invalid font
         if len(sys.argv) == 3:
-            # Check if 1 arg is a valid font flag
+            # Check if arg[1] is a valid font flag
             if sys.argv[1] not in ["-f", "--font"]:
                 sys.exit("Invalid usage")
-            # Store the specified font name from the text input
-            font = sys.argv[2]
             # Check if the font name exists in the available fonts from figlet
-            if font not in fonts:
+            if sys.argv[2] not in fonts:
                 sys.exit("Invalid usage")
 
         try:
