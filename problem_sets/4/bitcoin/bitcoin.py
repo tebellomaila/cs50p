@@ -4,7 +4,6 @@ import sys
 
 def parse_arguments():
     """ Parses and validate the command-line arguments """
-
     if len(sys.argv) != 2:
         sys.exit("Error: Missing command-line argument <number_of_bitcoins>")
 
@@ -21,10 +20,10 @@ def parse_arguments():
 def get_bitcoin_price(api_key):
     """ Fetches the current Bitcoin price data from the CoinCap API """
 
-    url = "rest.coincap.io/v3/assets/bitcoin?apiKey={api_key}"
+    url = "https://rest.coincap.io/v3/assets/bitcoin?apiKey={}.format(api_key)" 
 
     try:
-        # Fetches Bitcoin data from the API
+        # Fetch Bitcoin data from the API
         res = requests.get(url)
         res.raise_for_status()      # Raise exception for HTTP errors
         
@@ -40,12 +39,13 @@ def get_bitcoin_price(api_key):
     except requests.exceptions.ConnectionError:
         sys.exit("Error: Network connection failed. Please check your internet connection.")
     except requests.exceptions.HTTPError as e:
-        if e.res.status_code == 401:
+        if e.response.status_code == 401:
             sys.exit("Error: Invalid API key. Please check your CoinCap API key.")
-        elif e.res.status_code == 404:
+        elif e.response.status_code == 404:
             sys.exit("Error: API request not found.")
         else:
-            sys.exit(f"Error: API request failed with status code {e.res.status_code}.")
+            sys.exit(f"Error: API request failed with status code {e.response.status_code}.")
+
     except reqeusts.exceptions.RequestException:
         sys.exit("Error: Unable to connect to CoinCap API")
 
@@ -57,7 +57,7 @@ def main():
     n = parse_arguments()
 
     # API configuration 
-    API_KEY = "1554b9a3636d57f96a6a68cfcb607e282e045ebe39d6ca84ba15d2883d997194"
+    API_KEY = "399cb67a51686aef0d64c8329e6167394790fa162532c5ce543a68dc0fbaefd9"
 
     # Get the current Bitcoin price and calculate the cost
     price = get_bitcoin_price(API_KEY)
