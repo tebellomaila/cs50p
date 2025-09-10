@@ -2,7 +2,7 @@ def shorten(s):
     """ Remove all vowels from the string input """
 
     # Use a list comprehension to filter out vowels and then join the characters
-    return "".join([c for c in s if c not in "aeiouAEIOU"])
+    return "".join([c for c in s if c not in "aeiou"])
 
 def main():
     # Prompt user for input and remove whitespaces
@@ -14,4 +14,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
