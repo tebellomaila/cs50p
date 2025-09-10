@@ -12,6 +12,7 @@ def say(message):
 
 def main():
     """ Main function handles user input and output """
+    
     # Prompt for user input and convert to lowercase
     greeting = input("Greeting: ").strip().lower()
     print(say(greeting))
