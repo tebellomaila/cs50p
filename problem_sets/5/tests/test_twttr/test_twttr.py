@@ -25,3 +25,4 @@ def test_shorten_case_sensitivity():
     assert shorten("UPPERCASE") == "PPRCS"
     assert shorten("lowercase") == "lwrcs"
     assert shorten("UPPERCASElowercase") == "PPRCSlwrcs"
+
